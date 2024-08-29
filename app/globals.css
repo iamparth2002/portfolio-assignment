@@ -3,31 +3,35 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
+  /* Define the color variable at the root level */
+  --nextui-background: 240 11% 11%;
+  --nextui-background-opacity: 1; /* Set default opacity to 1 if not already defined */
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+  --nextui-foreground:229 67% 91%; /* Example value: white text in HSL format */
+  --nextui-foreground-opacity: 1; /* Set default opacity to 1 */
 }
-
+#top-bg-cover-img {
+  background-image: url(/blue_hero_bg.jpg);
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  position: absolute;
+  background-repeat: no-repeat;
+  filter: blur(5px);
+  z-index: 1;
+  -webkit-filter: blur(5px);
+}
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
-}
+  
+  margin:0 auto;
+  display: flex;
+  flex-direction: column;
+  background-color: hsl(var(--nextui-background) / var(--nextui-background-opacity));
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+  --tw-text-opacity: 1;
+  color: hsl(var(--nextui-foreground) / var(--nextui-foreground-opacity, var(--tw-text-opacity)));
+  
+
+
+  /* align-items: center; */
 }
