@@ -4,7 +4,7 @@ const Experience = ({DATA}) => {
   return (
     <section
       id="experience"
-      className="dark max-w-screen-lg px-4 sm:px-6 mx-auto grid pb-4 pt-16"
+      className="dark px-4 sm:px-6 mx-auto grid pb-4 pt-16"
     >
       <a href="#experience">
         <h1 className="text-4xl font-semibold underline">Experience</h1>
@@ -19,8 +19,8 @@ const Experience = ({DATA}) => {
               {work?.start} - {work?.end}
             </time>
             <h3 className="text-lg font-medium ">{work?.title}</h3>
-            <p className="pb-1 text-foreground/90">{work?.company} • Remote</p>
-            <ul className="list-disc list-inside mb-4 text-sm font-normal text-darkfg">
+            <p className="pb-1 text-foreground/90">{work?.company} • {work?.type}</p>
+            <ul className="list-disc list-outside ml-4 mb-4 text-sm font-normal text-pretty text-darkfg">
               {work?.list?.map((item, index) => (
                 <li>{item}</li>
               ))}

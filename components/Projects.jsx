@@ -4,7 +4,7 @@ const Projects = ({ DATA }) => {
   return (
     <section
       id="projects"
-      className="dark max-w-screen-lg px-4 sm:px-6 mx-auto grid pb-4 pt-16 gap-14"
+      className="dark px-4 sm:px-6 mx-auto grid pb-4 pt-16 gap-14"
     >
       <div className="space-y-2">
         <a href="#projects">

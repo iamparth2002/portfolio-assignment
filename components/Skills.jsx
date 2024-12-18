@@ -4,7 +4,7 @@ const Skills = () => {
   return (
     <section
       id="skills"
-      className="dark max-w-screen-lg px-4 sm:px-6 mx-auto grid pb-4 pt-16"
+      className="dark px-4 sm:px-6 mx-auto grid pb-4 pt-16"
     >
       <a href="#skills">
         <h1 className="text-4xl font-semibold underline">Skills</h1>

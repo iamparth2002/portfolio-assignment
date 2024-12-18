@@ -1,12 +1,50 @@
-import { Button, Input, Textarea } from './../components/MTtailwind';
+'use client'
+import { useState } from 'react';
+import { Button, Input } from './../components/MTtailwind';
 
-import React from 'react';
+const Contact = ({ DATA }) => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    subject: '',
+    message: '',
+  });
 
-const Contact = ({DATA}) => {
+  const [status, setStatus] = useState(null);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setStatus(null); // Reset status
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        setStatus('Message sent successfully!');
+        setFormData({ name: '', email: '', subject: '', message: '' }); // Clear form
+      } else {
+        setStatus('Failed to send message. Please try again.');
+      }
+    } catch (error) {
+      setStatus('An error occurred. Please try again.');
+    }
+  };
+
   return (
     <section
       id="contact"
-      className="dark max-w-screen-lg px-4 sm:px-6 mx-auto grid pb-4 pt-16"
+      className="dark px-4 sm:px-6 mx-auto grid pb-4 pt-16"
     >
       <a href="#contact">
         <h1 className="text-4xl font-semibold underline">Contact</h1>
@@ -14,16 +52,19 @@ const Contact = ({DATA}) => {
       <br />
       <article className="flex flex-col md:flex-row pt-3 gap-8 justify-between">
         <div className="flex flex-col gap-4 justify-between basis-1/2">
-          <div className=" border-l-2 border-gray-500 pl-3">
+          <div className="border-l-2 border-gray-500 pl-3">
             <p className="-mt-1 font-medium bg-gradient-to-br from-foreground to-foreground/60 bg-clip-text inline-block text-transparent text-white">
               Looking to make an impact! Reach out to discuss potential roles,
               project collaborations, or just to connect.
             </p>
           </div>
+          {/* Social Links */}
           <ul className="flex flex-wrap md:flex-col text-foreground/90 gap-4 md:justify-end">
             <li>
               <a
-                href={DATA?.contact?.email}
+                href={`https://mail.google.com/mail/?view=cm&fs=1&to=${DATA?.contact?.email}`}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="underline flex gap-2 items-center w-fit"
               >
                 <svg width={24} height={24} viewBox="0 0 24 24" fill="none">
@@ -107,35 +148,51 @@ const Contact = ({DATA}) => {
             </li>
           </ul>
         </div>
-        <form className="flex flex-col gap-4 basis-1/2">
+        <form className="flex flex-col gap-4 basis-1/2" onSubmit={handleSubmit}>
           <div className="flex flex-col sm:flex-row gap-4">
-            <div
-              className="w-full inline-flex  tap-highlight-transparent px-3 !px-1 !pb-0 !gap-0 relative  rounded-medium flex-col items-start justify-center h-14 py-2"
-              style={{ cursor: 'text' }}
-            >
-              <Input label="Name" variant="standard" color="white" />
+            <div>
+              <Input
+                name="name"
+                label="Name"
+                value={formData.name}
+                onChange={handleChange}
+                required
+                variant="standard"
+                color="white"
+              />
             </div>
-            <div
-              className="w-full inline-flex  tap-highlight-transparent px-3 !px-1 !pb-0 !gap-0 relative  rounded-medium flex-col items-start justify-center h-14 py-2"
-              style={{ cursor: 'text' }}
-            >
-              <Input label="Email*" variant="standard" color="white" />
+            <div>
+              <Input
+                name="email"
+                label="Email*"
+                value={formData.email}
+                onChange={handleChange}
+                required
+                variant="standard"
+                color="white"
+              />
             </div>
           </div>
-          <div
-            className="w-full inline-flex  tap-highlight-transparent px-3 !px-1 !pb-0 !gap-0 relative  rounded-medium flex-col items-start justify-center h-14 py-2"
-            style={{ cursor: 'text' }}
-          >
-            <Input label="Subject *" variant="standard" color="white" />
+          <div>
+            <Input
+              name="subject"
+              label="Subject*"
+              value={formData.subject}
+              onChange={handleChange}
+              required
+              variant="standard"
+              color="white"
+            />
           </div>
-          <div class="relative w-full min-w-[200px]">
+          <div className="relative w-full min-w-[200px]">
             <textarea
-              class="peer h-full min-h-[100px] w-full resize-none border-b border-white bg-transparent pt-4 pb-1.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border-white focus:border-gray-900 focus:outline-0 disabled:resize-none disabled:border-0 disabled:bg-blue-gray-50"
-              placeholder=" "
+              name="message"
+              className="peer h-full min-h-[100px] w-full text-white resize-none border-b border-white bg-transparent pt-4 pb-1.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border-white focus:border-gray-900 focus:outline-0 disabled:resize-none disabled:border-0 disabled:bg-blue-gray-50"
+              placeholder="Message"
+              value={formData.message}
+              onChange={handleChange}
+              required
             ></textarea>
-            <label class="after:content[' '] pointer-events-none absolute left-0 -top-1.5 flex h-full w-full select-none text-[11px] font-normal leading-tight text-white transition-all after:absolute after:-bottom-0 after:block after:w-full after:scale-x-0 after:border-b-2 after:text-white after:transition-transform after:duration-300 peer-placeholder-shown:text-sm peer-placeholder-shown:leading-[4.25] peer-placeholder-shown:text-white peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-white peer-focus:after:scale-x-100 peer-focus:after:border-gray-900 peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500">
-              Message
-            </label>
           </div>
 
           <button
@@ -144,6 +201,9 @@ const Contact = ({DATA}) => {
           >
             SUBMIT
           </button>
+          {status && (
+            <p className="text-sm text-white mt-2">{status}</p>
+          )}
         </form>
       </article>
     </section>
@@ -151,7 +211,3 @@ const Contact = ({DATA}) => {
 };
 
 export default Contact;
-
-
-
-

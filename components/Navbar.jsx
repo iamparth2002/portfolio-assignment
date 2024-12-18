@@ -15,8 +15,8 @@ const Navbar = ({DATA}) => {
       <header className="flex w-full flex-row px-6 gap-4 items-center justify-between py-6">
         <strong>{DATA?.name}.</strong>
         <ul className="hidden sm:flex gap-4">
-          <a href='#projects' className='hover:text-white hover:cursor-pointer'>projects</a>
           <a href='#experience' className='hover:text-white hover:cursor-pointer'>experience</a>
+          <a href='#projects' className='hover:text-white hover:cursor-pointer'>projects</a>
           <a href='#skills' className='hover:text-white hover:cursor-pointer'>skills</a>
           <a href='#contact' className='hover:text-white hover:cursor-pointer'>contact</a>
         </ul>
