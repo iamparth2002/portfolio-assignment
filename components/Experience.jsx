@@ -37,7 +37,7 @@ const Experience = ({DATA}) => {
               ))}
 
             </ul>
-            <div className="flex gap-2 lg:bottom-0 pt-2">
+            {/* <div className="flex gap-2 lg:bottom-0 pt-2">
               <a
                 href="#"
                 target="_blank"
@@ -54,7 +54,7 @@ const Experience = ({DATA}) => {
               >
                 Certificate
               </a>
-            </div>
+            </div> */}
           </li>
         ))}
       </ol>
