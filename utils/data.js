@@ -67,7 +67,7 @@ export const DATA = {
       location: 'New Delhi, India',
       title: 'Full Stack Developer',
       logoUrl: '/bi.png',
-      start: 'Mar 2024',
+      start: 'Jan 2024',
       end: 'Jun 2024',
       list: [
         'Designed and deployed The Colorants, a full-stack web app using Next.js, Node.js, and MongoDB, achieving 100% uptime during client onboarding.',
